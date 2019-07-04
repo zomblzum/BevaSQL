@@ -1,1 +1,1 @@
-include ':ksql'
+include ':ksql', ':testapp'
