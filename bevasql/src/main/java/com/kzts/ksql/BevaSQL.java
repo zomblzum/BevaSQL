@@ -1,9 +1,9 @@
 package com.kzts.ksql;
 
-public class KSQL {
+public class BevaSQL {
     private ConnectionManager connectionManager;
 
-    public KSQL(ConnectionToken token) {
+    public BevaSQL(ConnectionToken token) {
         this.connectionManager = ConnectionManager.getFromToken(token);
     }
 

@@ -2,7 +2,7 @@ package com.kzts.ksql.log;
 
 public class AndroidLog implements Logger {
     private static int LEVEL = android.util.Log.WARN;
-    private static final String TAG = "KSQL";
+    private static final String TAG = "BevaSQL";
 
     @Override
     public void d(String message) {
