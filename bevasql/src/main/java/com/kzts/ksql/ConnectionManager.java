@@ -22,7 +22,7 @@ class ConnectionManager {
 
     void connect() {
         try {
-            Class.forName("net.sourceforge.jtds.jdbc.Driver");
+            DriverManager.registerDriver(new net.sourceforge.jtds.jdbc.Driver());
             connection = getWorkConnection();
             statement = connection.createStatement();
         } catch (Exception e) {
