@@ -20,6 +20,7 @@ public class ConnectionToken {
         return password;
     }
     String getTokenAddress() {
-        return "jdbc:jtds:sqlserver://" + this.server + "/" + this.database + ";charset=utf8";
+        return "jdbc:sqlserver://" + this.server + ";databaseName=" + this.database
+                        + ";user=" + this.user + ";password=" + this.password;
     }
 }

@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ConnectionUnitTest {
     @Test
     void getConnectionAddressString_isCorrect() {
-        String connectionStringTest = "jdbc:jtds:sqlserver://server/db;charset=utf8";
+        String connectionStringTest = "jdbc:sqlserver://server;databaseName=db;user=login;password=pwd";
         ConnectionToken connectionToken = new ConnectionToken("server","db","login","pwd");
         assertEquals(connectionToken.getTokenAddress(), connectionStringTest);
     }

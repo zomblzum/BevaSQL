@@ -22,7 +22,7 @@ class ConnectionManager {
 
     void connect() {
         try {
-            DriverManager.registerDriver(new net.sourceforge.jtds.jdbc.Driver());
+            DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
             connection = getWorkConnection();
             statement = connection.createStatement();
         } catch (Exception e) {
@@ -53,9 +53,7 @@ class ConnectionManager {
     }
 
     private Connection getWorkConnection() throws SQLException {
-        return DriverManager.getConnection( connectionInfo.getTokenAddress(),
-                                            connectionInfo.getUser(),
-                                            connectionInfo.getPassword());
+        return DriverManager.getConnection( connectionInfo.getTokenAddress());
     }
     private ResultSet executeQueryWithResultSet(ProcedureQuery procedureQuery) throws SQLException {
         return statement.executeQuery(procedureQuery.build());
