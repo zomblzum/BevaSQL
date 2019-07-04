@@ -1,8 +1,8 @@
 # BevaSQL
 
-[![](https://jitpack.io/v/zomblzum/BevaSQL.svg)](https://jitpack.io/#zomblzum/BevaSQL)
-
 JAVA API based on JDBC for execute stored procedures on MSSQL SERVER
+
+[![](https://jitpack.io/v/zomblzum/BevaSQL.svg)](https://jitpack.io/#zomblzum/BevaSQL)
 
 ## Examples
 --------
@@ -42,8 +42,16 @@ List result = bevaSQL.storedProcedure()
 --------
 Add to your gradle.build
 
-
 ```java
-implementation 'com.github.zomblzum:BevaSQL:0.1.1'
-implementation 'com.microsoft.sqlserver:mssql-jdbc:6.1.0.jre8'
+allprojects {
+       repositories {
+              ...
+              maven { url 'https://jitpack.io' }
+	}
+}
+
+dependencies {
+       implementation 'com.github.zomblzum:BevaSQL:0.1.1'
+       implementation 'com.microsoft.sqlserver:mssql-jdbc:6.1.0.jre8'
+}
 ```
