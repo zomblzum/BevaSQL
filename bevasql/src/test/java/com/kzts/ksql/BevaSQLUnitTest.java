@@ -15,27 +15,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class BevaSQLUnitTest {
     private ConnectionToken token = new ConnectionToken("myst","kzts_main","test_vlad", "612000173");
 
-    @Entity
     public class Order {
         @EntityField("doc_num")
-        String ndo;
+        private int ndo;
         @EntityField("bin_name")
-        String binName;
+        private String binName;
+        @EntityField("string_num")
+        private int stringNum;
     }
 
     @Test
-    void storedProcedureCommitTry() {
-        BevaSQL bevaSQL = new BevaSQL(token);
-        bevaSQL.storedProcedure()
-                .setProcedure("message_insert_new")
-                .addParameter("form_name","test123")
-                .addParameter("message_text", 123.321)
-                .execute();
-    }
-
-
-    @Test
-    void storedProcedureGetTry() throws SQLException, IllegalAccessException {
+    void storedProcedureGetTry() throws Exception {
         BevaSQL bevaSQL = new BevaSQL(token);
         List<Order> orders = bevaSQL.storedProcedure()
                                 .setProcedure("stock_shuttle_scan_get_order_items_2014")
@@ -43,7 +33,7 @@ class BevaSQLUnitTest {
                                 .addParameter("mode",1).get(Order::new);
 
         for (Order order: orders) {
-            System.out.println(order.ndo + "||" + order.binName);
+            System.out.println(order.ndo + "||" + order.binName + "||" + order.stringNum);
         }
     }
 }

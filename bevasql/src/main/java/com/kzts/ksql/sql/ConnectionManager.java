@@ -1,7 +1,6 @@
 package com.kzts.ksql.sql;
 
 import com.kzts.ksql.log.Log;
-import com.kzts.ksql.util.Supplier;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -37,7 +36,7 @@ class ConnectionManager<E> {
             Log.e(e.getMessage(),e.getCause());
         }
     }
-    ResultSet get(ProcedureQuery procedureQuery, Supplier<E> entity) {
+    ResultSet get(ProcedureQuery procedureQuery, Entity entity) {
         try {
             return executeQueryWithResultSet(procedureQuery, entity);
         } catch (Exception e) {
@@ -56,7 +55,7 @@ class ConnectionManager<E> {
     private Connection getWorkConnection() throws SQLException {
         return DriverManager.getConnection( connectionInfo.getTokenAddress());
     }
-    private ResultSet executeQueryWithResultSet(ProcedureQuery procedureQuery, Supplier<E> entity) throws SQLException {
+    private ResultSet executeQueryWithResultSet(ProcedureQuery procedureQuery, Entity entity) throws SQLException {
         return statement.executeQuery(procedureQuery.build());
     }
     private void executeQuery (ProcedureQuery procedureQuery) throws SQLException {

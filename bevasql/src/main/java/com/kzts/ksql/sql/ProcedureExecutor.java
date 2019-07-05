@@ -1,11 +1,8 @@
 package com.kzts.ksql.sql;
 
-import com.kzts.ksql.util.Supplier;
 import com.kzts.ksql.parameters.ParameterFactory;
-import com.kzts.ksql.util.ResultSetReader;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 
@@ -34,11 +31,15 @@ public class ProcedureExecutor<V, E> {
         connectionManager.execute(procedureQuery);
         connectionManager.close();
     }
-    public List<E> get(Supplier<E> entity) throws SQLException, IllegalAccessException {
+    public List<E> get(Supplier<E> supplier) throws Exception {
         connectionManager.connect();
-        ResultSetReader resultSetReader = new ResultSetReader(entity);
+
+        //ToDo вынести в разные методы
+        Entity entity = new Entity(supplier);
         ResultSet resultSet = connectionManager.get(procedureQuery, entity);
-        List<E> data = resultSetReader.toEntityList(resultSet);
+        ResultSetReader resultSetReader = new ResultSetReader(resultSet);
+        List<E> data = resultSetReader.toEntityList(entity);
+
         connectionManager.close();
         return data;
     }

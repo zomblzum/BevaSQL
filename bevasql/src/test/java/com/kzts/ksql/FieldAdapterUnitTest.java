@@ -2,7 +2,6 @@ package com.kzts.ksql;
 
 import androidx.core.util.Supplier;
 
-import com.kzts.ksql.sql.Entity;
 import com.kzts.ksql.sql.EntityField;
 
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class FieldAdapterUnitTest<E> {
-    @Entity
     public class Order {
         @EntityField("ndo")
         int ndo;
@@ -39,7 +37,7 @@ public class FieldAdapterUnitTest<E> {
 
          */
 //        Order eee = getInstanceWithValue(Order::new);
-        testSup(Order::new);
+        Order order = getInstanceWithValue(Order::new);
     }
 
     private <E> E getInstanceWithValue(Supplier<E> entity){

@@ -31,5 +31,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0-alpha01'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.0.1'
     implementation 'com.microsoft.sqlserver:mssql-jdbc:6.1.0.jre8'
-
+    testCompileOnly 'org.apiguardian:apiguardian-api:1.0.0'
 }

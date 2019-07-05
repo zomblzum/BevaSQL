@@ -1,4 +1,4 @@
-package com.kzts.ksql.util;
+package com.kzts.ksql.sql;
 
 @FunctionalInterface
 public interface Supplier<T> {
