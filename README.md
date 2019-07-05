@@ -30,11 +30,20 @@ bevaSQL.storedProcedure()
 Or with returning value
 
 ```java
-List result = bevaSQL.storedProcedure()
-                     .setProcedure("procedure_name_2")
-                     .addParameter("param_name_1",1)
-                     .addParameter("param_name_2",2f)
-                     .get(); 
+
+private class Person {
+    @EntityField("person_name")
+    private String name;
+    @EntityField("person_fname")
+    private String secondName;
+    @EntityField("person_age")
+    private int age;
+}
+
+List<Person> result = bevaSQL.storedProcedure()
+                     .setProcedure("get_all_persons")
+                     .addParameter("city","Moscow")
+                     .get(Person::new);
         
 ```
 
