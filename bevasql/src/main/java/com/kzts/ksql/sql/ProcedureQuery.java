@@ -1,4 +1,4 @@
-package com.kzts.ksql;
+package com.kzts.ksql.sql;
 
 import com.kzts.ksql.builders.Builder;
 import com.kzts.ksql.builders.ProcedureBuilder;

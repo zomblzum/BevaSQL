@@ -1,4 +1,4 @@
-package com.kzts.ksql;
+package com.kzts.ksql.sql;
 
 public class BevaSQL {
     private ConnectionManager connectionManager;

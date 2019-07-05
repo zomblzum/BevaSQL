@@ -1,14 +1,15 @@
-package com.kzts.ksql;
+package com.kzts.ksql.sql;
 
+import com.kzts.ksql.util.Supplier;
 import com.kzts.ksql.parameters.ParameterFactory;
 import com.kzts.ksql.util.ResultSetReader;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
-public class ProcedureExecutor<V> {
+
+public class ProcedureExecutor<V, E> {
     private ConnectionManager connectionManager;
     private ProcedureQuery procedureQuery;
     private ParameterFactory parameterFactory;
@@ -33,10 +34,11 @@ public class ProcedureExecutor<V> {
         connectionManager.execute(procedureQuery);
         connectionManager.close();
     }
-    public List<Map<String, String>> get() throws SQLException {
+    public List<E> get(Supplier<E> entity) throws SQLException, IllegalAccessException {
         connectionManager.connect();
-        ResultSet resultSet = connectionManager.get(procedureQuery);
-        List<Map<String, String>> data = new ResultSetReader().toList(resultSet);
+        ResultSetReader resultSetReader = new ResultSetReader(entity);
+        ResultSet resultSet = connectionManager.get(procedureQuery, entity);
+        List<E> data = resultSetReader.toEntityList(resultSet);
         connectionManager.close();
         return data;
     }

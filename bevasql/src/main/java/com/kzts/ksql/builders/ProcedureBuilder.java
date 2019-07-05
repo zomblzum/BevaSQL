@@ -1,6 +1,6 @@
 package com.kzts.ksql.builders;
 
-import com.kzts.ksql.ProcedureQuery;
+import com.kzts.ksql.sql.ProcedureQuery;
 import com.kzts.ksql.parameters.Parameter;
 
 import java.util.List;

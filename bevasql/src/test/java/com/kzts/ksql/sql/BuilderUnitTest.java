@@ -1,8 +1,8 @@
-package com.kzts.ksql;
+package com.kzts.ksql.sql;
 
 import com.kzts.ksql.builders.ProcedureBuilder;
-import com.kzts.ksql.parameters.Parameter;
 import com.kzts.ksql.parameters.VarcharParameter;
+import com.kzts.ksql.sql.ProcedureQuery;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;

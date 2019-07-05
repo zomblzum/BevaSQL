@@ -1,6 +1,6 @@
 package com.kzts.ksql.builders;
 
-import com.kzts.ksql.ProcedureQuery;
+import com.kzts.ksql.sql.ProcedureQuery;
 
 public class FunctionBuilder implements Builder {
     @Override

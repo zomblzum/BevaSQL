@@ -1,6 +1,7 @@
-package com.kzts.ksql;
+package com.kzts.ksql.sql;
 
 import com.kzts.ksql.log.Log;
+import com.kzts.ksql.util.Supplier;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-class ConnectionManager {
+class ConnectionManager<E> {
     private Connection connection;
     private Statement statement;
     private ConnectionToken connectionInfo;
@@ -26,7 +27,7 @@ class ConnectionManager {
             connection = getWorkConnection();
             statement = connection.createStatement();
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(e.getMessage(),e.getCause());
         }
     }
     void execute(ProcedureQuery procedureQuery) {
@@ -36,10 +37,10 @@ class ConnectionManager {
             Log.e(e.getMessage(),e.getCause());
         }
     }
-    ResultSet get(ProcedureQuery procedureQuery) {
+    ResultSet get(ProcedureQuery procedureQuery, Supplier<E> entity) {
         try {
-            return executeQueryWithResultSet(procedureQuery);
-        } catch (SQLException e) {
+            return executeQueryWithResultSet(procedureQuery, entity);
+        } catch (Exception e) {
             Log.e(e.getMessage(),e.getCause());
             return null;
         }
@@ -47,7 +48,7 @@ class ConnectionManager {
     void close() {
         try {
             closeConnectionManager();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             Log.e(e.getMessage(),e.getCause());
         }
     }
@@ -55,7 +56,7 @@ class ConnectionManager {
     private Connection getWorkConnection() throws SQLException {
         return DriverManager.getConnection( connectionInfo.getTokenAddress());
     }
-    private ResultSet executeQueryWithResultSet(ProcedureQuery procedureQuery) throws SQLException {
+    private ResultSet executeQueryWithResultSet(ProcedureQuery procedureQuery, Supplier<E> entity) throws SQLException {
         return statement.executeQuery(procedureQuery.build());
     }
     private void executeQuery (ProcedureQuery procedureQuery) throws SQLException {
