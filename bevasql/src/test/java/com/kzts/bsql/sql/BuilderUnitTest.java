@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class BuilderUnitTest {
     @Test
     void build_isCorrect() {
-        ProcedureQuery procedureQuery = new ProcedureQuery();
+        Query procedureQuery = new Query(new ProcedureBuilder());
         procedureQuery.setProcedure("get_view");
         procedureQuery.addParameter(new VarcharParameter("name1","value"));
         procedureQuery.addParameter(new VarcharParameter("name2","123"));

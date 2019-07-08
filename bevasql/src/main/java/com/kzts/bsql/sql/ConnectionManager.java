@@ -29,18 +29,18 @@ class ConnectionManager {
             Log.e(e.getMessage(),e.getCause());
         }
     }
-    void execute(ProcedureQuery procedureQuery) {
+    void execute(Query procedureQuery) {
         try {
             executeQuery(procedureQuery);
         } catch (Exception e) {
-            Log.e(e.getMessage(),e.getCause());
+            Log.e(e.getMessage(),e.fillInStackTrace());
         }
     }
-    ResultSet get(ProcedureQuery procedureQuery, Entity entity) {
+    ResultSet get(Query procedureQuery, Entity entity) {
         try {
             return executeQueryWithResultSet(procedureQuery, entity);
         } catch (Exception e) {
-            Log.e(e.getMessage(),e.getCause());
+            Log.e(e.getMessage(),e.fillInStackTrace());
             return null;
         }
     }
@@ -55,10 +55,10 @@ class ConnectionManager {
     private Connection getWorkConnection() throws SQLException {
         return DriverManager.getConnection( connectionInfo.getTokenAddress());
     }
-    private ResultSet executeQueryWithResultSet(ProcedureQuery procedureQuery, Entity entity) throws SQLException {
+    private ResultSet executeQueryWithResultSet(Query procedureQuery, Entity entity) throws SQLException {
         return statement.executeQuery(procedureQuery.build());
     }
-    private void executeQuery (ProcedureQuery procedureQuery) throws SQLException {
+    private void executeQuery (Query procedureQuery) throws SQLException {
         statement.execute(procedureQuery.build());
     }
     private void closeConnectionManager() throws SQLException {

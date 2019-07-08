@@ -1,19 +1,18 @@
 package com.kzts.bsql.sql;
 
 import com.kzts.bsql.builders.Builder;
-import com.kzts.bsql.builders.ProcedureBuilder;
 import com.kzts.bsql.parameters.Parameter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProcedureQuery {
+public class Query {
     private String procedure;
-    private List<Parameter> parameters = new ArrayList<Parameter>();
+    private List<Parameter> parameters = new ArrayList<>();
     private Builder builder;
 
-    ProcedureQuery() {
-        this.builder = new ProcedureBuilder();
+    Query(Builder builder) {
+        this.builder = builder;
     }
 
     String build() {

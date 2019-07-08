@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DataAdapterUnitTest {
     private String n = "name";
-    private ParameterFactory<java.io.Serializable> parameterFactory = new ParameterFactory<>();
+    private ParameterFactory parameterFactory = new ParameterFactory();
 
     @Test
     void getString_isCorrect() {

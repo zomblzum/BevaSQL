@@ -1,41 +1,32 @@
 package com.kzts.bsql.sql;
 
-import com.kzts.bsql.builders.ProcedureBuilder;
+import com.kzts.bsql.builders.FunctionBuilder;
 import com.kzts.bsql.parameters.ParameterFactory;
 
 import java.sql.ResultSet;
 import java.util.List;
 
 
-public class ProcedureExecutor<V, E> {
+public class FunctionExecutor<V, E> {
     private ConnectionManager connectionManager;
     private Query query;
     private ParameterFactory<V> parameterFactory;
 
-    ProcedureExecutor(ConnectionManager connectionManager) {
+    FunctionExecutor(ConnectionManager connectionManager) {
         this.parameterFactory = new ParameterFactory<>();
-        this.query = new Query(new ProcedureBuilder());
+        this.query = new Query(new FunctionBuilder());
         this.connectionManager = connectionManager;
     }
 
-    public ProcedureExecutor setProcedure(String procedure) {
+    public FunctionExecutor setFunction(String procedure) {
         query.setProcedure(procedure);
         return this;
     }
-    public ProcedureExecutor addParameter(String name, V value) {
-        query.addParameter(parameterFactory.get(name, value));
-        return this;
-    }
-    public ProcedureExecutor addParameter(V value) {
+    public FunctionExecutor addParameter(V value) {
         query.addParameter(parameterFactory.get(null,value));
         return this;
     }
 
-    public void execute() {
-        connect();
-        connectionManager.execute(query);
-        close();
-    }
     public List<E> get(Supplier<E> supplier) throws Exception {
         connect();
 

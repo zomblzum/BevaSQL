@@ -4,14 +4,14 @@ import java.lang.reflect.Field;
 import java.util.Objects;
 
 
-public class Entity<E> {
+class Entity<E> {
     private Supplier<E> entity;
 
     Entity(Supplier<E> entity) {
         this.entity = entity;
     }
 
-    public E get() {
+    E get() {
         return this.entity.get();
     }
     Field[] fields() {

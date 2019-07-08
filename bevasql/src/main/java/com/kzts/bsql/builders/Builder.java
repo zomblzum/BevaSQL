@@ -1,7 +1,13 @@
 package com.kzts.bsql.builders;
 
-import com.kzts.bsql.sql.ProcedureQuery;
+import com.kzts.bsql.parameters.Parameter;
+import com.kzts.bsql.sql.Query;
+
+import java.util.List;
 
 public interface Builder {
-    public String build(ProcedureQuery procedureQuery);
+    String build(Query procedureQuery);
+
+    void setProcedureName(String procedure);
+    void addParameters(List<Parameter> parameters);
 }

@@ -1,6 +1,6 @@
 package com.kzts.bsql.parameters;
 
 public interface Parameter {
-    public String getName();
-    public String getValue();
+    String getName();
+    String getValue();
 }

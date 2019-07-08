@@ -14,10 +14,10 @@ class ResultSetReader<E> {
         this.resultSet = resultSet;
     }
 
-    List<E> toEntityList(Entity entity) throws Exception {
+    List<E> toEntityList(Entity<? extends E> entity) throws Exception {
         List<E> entityList = new ArrayList<>();
         while(resultSet.next()){
-            E newEntity = (E) entity.get();
+            E newEntity = entity.get();
             for (Field field: entity.fields()) {
                 String annotation = entity.annotation(field);
                 if(isExist(resultSet,annotation)) {
