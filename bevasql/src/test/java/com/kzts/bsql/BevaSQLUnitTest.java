@@ -3,13 +3,11 @@ package com.kzts.bsql;
 import com.kzts.bsql.sql.BevaSQL;
 import com.kzts.bsql.sql.ConnectionToken;
 import com.kzts.bsql.sql.EntityField;
-import com.kzts.bsql.sql.ProcedureExecutor;
 
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 class BevaSQLUnitTest {
@@ -47,7 +45,7 @@ class BevaSQLUnitTest {
         BevaSQL bevaSQL = new BevaSQL(token);
 
         List<Order> orders = bevaSQL.storedProcedure()
-                .setProcedure("stock_shuttle_scan_get_order_items_2014")
+                .set("stock_shuttle_scan_get_order_items_2014")
                 .addParameter(201947773)
                 .addParameter("mode",1)
                 .get(Order::new);
@@ -62,7 +60,7 @@ class BevaSQLUnitTest {
         BevaSQL bevaSQL = new BevaSQL(token);
 
         List<OrderLog> orders = bevaSQL.storedProcedure()
-                .setProcedure("get_move_platej_history")
+                .set("get_move_platej_history")
                 .get(OrderLog::new);
 
         for (OrderLog orderLog: orders) {
@@ -75,7 +73,7 @@ class BevaSQLUnitTest {
         BevaSQL bevaSQL = new BevaSQL(token);
 
         List<Rod> orders = bevaSQL.tableFunction()
-                .setFunction("[pso_sales_rods]")
+                .set("[pso_sales_rods]")
                 .addParameter(2019)
                 .get(Rod::new);
 

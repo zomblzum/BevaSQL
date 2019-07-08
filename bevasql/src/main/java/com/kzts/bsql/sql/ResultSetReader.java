@@ -31,7 +31,7 @@ class ResultSetReader<E> {
     }
 
     private boolean isExist(ResultSet resultSet, String column) throws SQLException {
-        if (isEmpty(column))
+        if (column == null || column.trim().isEmpty())
             return false;
 
         ResultSetMetaData metaData = resultSet.getMetaData();
@@ -40,9 +40,5 @@ class ResultSetReader<E> {
                 return true;
 
         return false;
-    }
-
-    private boolean isEmpty(String column) {
-        return column == null || column.trim().isEmpty();
     }
 }

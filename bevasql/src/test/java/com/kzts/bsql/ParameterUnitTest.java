@@ -15,6 +15,6 @@ class ParameterUnitTest {
     void parameterFromString_isCorrect() {
         Parameter parameter = new VarcharParameter(name, stringValue) ;
         assertEquals(parameter.getName(), name);
-        assertEquals(parameter.getValue(), stringValue);
+        assertEquals(parameter.getValue(), "'" + stringValue + "'");
     }
 }

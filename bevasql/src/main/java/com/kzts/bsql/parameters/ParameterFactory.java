@@ -8,6 +8,7 @@ public class ParameterFactory<V> {
         if (value instanceof String) {
             return new VarcharParameter(name, (String) value);
         }
+
         if (value instanceof Date) {
             return new DateTimeParameter(name, (Date) value);
         }

@@ -48,13 +48,4 @@ class DataAdapterUnitTest {
         assertEquals(parameter.getValue(), "5");
         assertEquals(parameter.getName(), n);
     }
-
-    @Test
-    void getSqlDate_isCorrect() {
-        Date now = new Date();
-        Parameter parameter = parameterFactory.get(n,now);
-        assertEquals(parameter.getValue(), "'"+new java.sql.Date(now.getTime()).toString() + " " +
-                String.format("%d:%d:%d",now.getHours(),now.getMinutes(),now.getSeconds())+"'");
-        assertEquals(parameter.getName(), n);
-    }
 }

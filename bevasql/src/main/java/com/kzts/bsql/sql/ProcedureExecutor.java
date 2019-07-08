@@ -6,7 +6,6 @@ import com.kzts.bsql.parameters.ParameterFactory;
 import java.sql.ResultSet;
 import java.util.List;
 
-
 public class ProcedureExecutor<V, E> {
     private ConnectionManager connectionManager;
     private Query query;
@@ -18,7 +17,7 @@ public class ProcedureExecutor<V, E> {
         this.connectionManager = connectionManager;
     }
 
-    public ProcedureExecutor setProcedure(String procedure) {
+    public ProcedureExecutor set(String procedure) {
         query.setProcedure(procedure);
         return this;
     }

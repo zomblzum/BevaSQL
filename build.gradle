@@ -1,5 +1,5 @@
 ext {
-    var = '0.1.0'
+    var = '0.3.0'
 }// Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {

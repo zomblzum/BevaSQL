@@ -13,13 +13,7 @@ public class ConnectionToken {
         this.password = password;
     }
 
-    String getUser() {
-        return user;
-    }
-    String getPassword() {
-        return password;
-    }
-    String getTokenAddress() {
+    String getMSSQLAddress() {
         return "jdbc:sqlserver://" + this.server + ";databaseName=" + this.database
                         + ";user=" + this.user + ";password=" + this.password;
     }

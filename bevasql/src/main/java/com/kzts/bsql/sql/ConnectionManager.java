@@ -53,7 +53,7 @@ class ConnectionManager {
     }
 
     private Connection getWorkConnection() throws SQLException {
-        return DriverManager.getConnection( connectionInfo.getTokenAddress());
+        return DriverManager.getConnection( connectionInfo.getMSSQLAddress());
     }
     private ResultSet executeQueryWithResultSet(Query procedureQuery, Entity entity) throws SQLException {
         return statement.executeQuery(procedureQuery.build());
