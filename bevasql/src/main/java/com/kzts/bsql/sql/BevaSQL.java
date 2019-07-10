@@ -16,15 +16,23 @@ public class BevaSQL {
      * Хранимая процедура sql
      * @return Объект для заполнения и выполнения процедуры
      */
-    public ProcedureExecutor storedProcedure() {
-        return new ProcedureExecutor(connectionManager);
+    public ProcedureExecutor storedProcedure(String procedure) {
+        return new ProcedureExecutor(connectionManager).set(procedure);
     }
 
     /**
      * Функция sql
      * @return Объект для управления функцией
      */
-    public FunctionExecutor tableFunction() {
-        return new FunctionExecutor(connectionManager);
+    public FunctionExecutor tableFunction(String function) {
+        return new FunctionExecutor(connectionManager).set(function);
+    }
+
+    /**
+     * Обычный запрос
+     * @return Объект для управления функцией
+     */
+    public QueryExecutor query(String query) {
+        return new QueryExecutor(connectionManager).set(query);
     }
 }

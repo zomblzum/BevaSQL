@@ -6,27 +6,19 @@ import com.kzts.bsql.parameters.ParameterFactory;
 import java.sql.ResultSet;
 import java.util.List;
 
-public class ProcedureExecutor<V, E> {
+public class QueryExecutor<V, E> {
     private ConnectionManager connectionManager;
     private Query query;
     private ParameterFactory<V> parameterFactory;
 
-    ProcedureExecutor(ConnectionManager connectionManager) {
+    QueryExecutor(ConnectionManager connectionManager) {
         this.parameterFactory = new ParameterFactory<>();
         this.query = new Query(new ProcedureBuilder());
         this.connectionManager = connectionManager;
     }
 
-    ProcedureExecutor set(String procedure) {
+    QueryExecutor set(String procedure) {
         query.setProcedure(procedure);
-        return this;
-    }
-    public ProcedureExecutor addParameter(String name, V value) {
-        query.addParameter(parameterFactory.get(name, value));
-        return this;
-    }
-    public ProcedureExecutor addParameter(V value) {
-        query.addParameter(parameterFactory.get(null,value));
         return this;
     }
 

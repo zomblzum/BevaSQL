@@ -17,7 +17,7 @@ public class FunctionExecutor<V, E> {
         this.connectionManager = connectionManager;
     }
 
-    public FunctionExecutor set(String procedure) {
+    FunctionExecutor set(String procedure) {
         query.setProcedure(procedure);
         return this;
     }
