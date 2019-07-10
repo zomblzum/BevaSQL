@@ -7,27 +7,26 @@ JAVA API based on JDBC for execute stored procedures on MSSQL SERVER
 ## Examples
 --------
 
+### Step 1: Connect
 Create connection token with connection info
 ```java
 ConnectionToken token = new ConnectionToken("server","db","user", "password");
 ```
 
-Create BevaSQL Instance
+Create BevaSQL instance from this token
 ```java
 BevaSQL bevaSQL = new BevaSQL(token);
 ```
 
-Execute simple stored procedure
+Or from values 
+
 ```java
-bevaSQL.storedProcedure()
-       .setProcedure("procedure_name")
-       .addParameter("param_name_1","test")
-       .addParameter("param_name_2", 1.234)
-       .addParameter("param_name_3", new Date())
-       .execute();
+BevaSQL bevaSQL = BevaSQL.fromValues("server","db","user", "password");
 ```
 
-Or with returning value
+### Step 2: Create entity if you need that
+
+Create entity class with annotated fields with columns name as value
 
 ```java
 
@@ -40,12 +39,51 @@ private class Person {
     private int age;
 }
 
-List<Person> result = bevaSQL.storedProcedure()
-                     .setProcedure("get_all_persons")
+```
+### Step 3: Execute
+
+Simple stored procedure
+
+```java
+
+bevaSQL.storedProcedure("procedure_name")
+       .addParameter("param_name_1","test")
+       .addParameter("param_name_2", 1.234)
+       .addParameter("param_name_3", new Date())
+       .execute();
+       
+```
+
+Procedure with returning value
+
+```java
+
+List<Person> result = bevaSQL.storedProcedure("get_all_persons")
                      .addParameter("city","Moscow")
                      .get(Person::new);
         
 ```
+
+Table valued function
+
+```java
+
+List<Person> result = bevaSQL.tableFunction("get_all_persons")
+                     .addParameter("city","Moscow")
+                     .get(Person::new);
+        
+```
+
+Or with needed query
+
+```java
+
+bevaSQL.query("insert into person values ('Ivan','Ivanov',25)").execute();
+       
+List<Person> result = bevaSQL.query("select * from persons where city = 'Moscow'").get(Person::new);
+        
+```
+
 
 ## Install
 --------
