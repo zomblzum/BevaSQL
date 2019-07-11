@@ -1,5 +1,7 @@
 package com.kzts.bsql.sql;
 
+import android.os.StrictMode;
+
 import com.kzts.bsql.log.Log;
 
 import java.sql.Connection;
@@ -22,6 +24,8 @@ class ConnectionManager {
 
     void connect() throws SQLException {
 //        try {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
             DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
             connection = getWorkConnection();
             statement = connection.createStatement();
