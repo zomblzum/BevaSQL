@@ -40,7 +40,7 @@ public class FunctionExecutor<V, E> {
         return data;
     }
 
-    private void connect() throws SQLException {
+    private void connect() throws SQLException, ClassNotFoundException {
         connectionManager.connect();
     }
     private void close() throws SQLException {

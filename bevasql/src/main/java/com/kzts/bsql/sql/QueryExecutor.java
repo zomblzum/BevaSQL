@@ -23,7 +23,7 @@ public class QueryExecutor<V, E> {
         return this;
     }
 
-    public void execute() throws SQLException {
+    public void execute() throws SQLException, ClassNotFoundException {
         connect();
         connectionManager.execute(query);
         close();
@@ -41,7 +41,7 @@ public class QueryExecutor<V, E> {
         return data;
     }
 
-    private void connect() throws SQLException {
+    private void connect() throws SQLException, ClassNotFoundException {
         connectionManager.connect();
     }
     private void close() throws SQLException {

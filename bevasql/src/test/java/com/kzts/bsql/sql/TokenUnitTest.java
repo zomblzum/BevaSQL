@@ -27,7 +27,7 @@ class TokenUnitTest {
         @EntityField("bin_name")
         String binName;
         @EntityField("id_bin")
-        Short binId;
+        Integer binId;
         @EntityField("bin_count")
         int binCount;
         @EntityField("bar_code")
@@ -63,7 +63,7 @@ class TokenUnitTest {
 
     @Test
     void getConnectionAddressString_isCorrect() {
-        String connectionStringTest = "jdbc:sqlserver://server;databaseName=db;user=login;password=pwd";
+        String connectionStringTest = "jdbc:jtds:sqlserver://server;databaseName=db;user=login;password=pwd;encrypt=true;trustServerCertificate=true;";
         ConnectionToken connectionToken = new ConnectionToken("server","db","login","pwd");
         assertEquals(connectionToken.getMSSQLAddress(), connectionStringTest);
     }

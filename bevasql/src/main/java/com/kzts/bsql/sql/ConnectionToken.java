@@ -14,7 +14,7 @@ public class ConnectionToken {
     }
 
     String getMSSQLAddress() {
-        return "jdbc:sqlserver://" + this.server + ";databaseName=" + this.database
+        return "jdbc:jtds:sqlserver://" + this.server + ";databaseName=" + this.database
                         + ";user=" + this.user + ";password=" + this.password
                         + ";encrypt=true;trustServerCertificate=true;";
     }

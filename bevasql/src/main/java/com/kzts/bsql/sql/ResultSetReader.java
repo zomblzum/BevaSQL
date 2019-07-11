@@ -14,7 +14,7 @@ class ResultSetReader<E> {
         this.resultSet = resultSet;
     }
 
-    List<E> toEntityList(Entity<? extends E> entity) throws Exception {
+    List<E> toEntityList(Entity<? extends E> entity) throws SQLException, IllegalAccessException {
         List<E> entityList = new ArrayList<>();
         while(resultSet.next()){
             E newEntity = entity.get();

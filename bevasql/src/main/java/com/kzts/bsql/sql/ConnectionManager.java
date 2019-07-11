@@ -22,11 +22,11 @@ class ConnectionManager {
         return new ConnectionManager(connectionInfo);
     }
 
-    void connect() throws SQLException {
+    void connect() throws SQLException, ClassNotFoundException {
 //        try {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-            DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+//            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+//            StrictMode.setThreadPolicy(policy);
+            Class.forName("net.sourceforge.jtds.jdbc.Driver");
             connection = getWorkConnection();
             statement = connection.createStatement();
 //        } catch (Exception e) {
@@ -40,13 +40,13 @@ class ConnectionManager {
 //            Log.e(e.getMessage(),e.fillInStackTrace());
 //        }
     }
-    ResultSet get(Query procedureQuery, Entity entity) {
-        try {
+    ResultSet get(Query procedureQuery, Entity entity) throws SQLException {
+//        try {
             return executeQueryWithResultSet(procedureQuery, entity);
-        } catch (Exception e) {
-            Log.e(e.getMessage(),e.fillInStackTrace());
-            return null;
-        }
+//        } catch (Exception e) {
+//            Log.e(e.getMessage(),e.fillInStackTrace());
+//            return null;
+//        }
     }
     void close() throws SQLException {
 //        try {
