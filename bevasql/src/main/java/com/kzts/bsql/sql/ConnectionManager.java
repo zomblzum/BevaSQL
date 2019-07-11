@@ -23,37 +23,18 @@ class ConnectionManager {
     }
 
     void connect() throws SQLException, ClassNotFoundException {
-//        try {
-//            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-//            StrictMode.setThreadPolicy(policy);
-            Class.forName("net.sourceforge.jtds.jdbc.Driver");
-            connection = getWorkConnection();
-            statement = connection.createStatement();
-//        } catch (Exception e) {
-//            Log.e(e.getMessage(),e.getCause());
-//        }
+        Class.forName("net.sourceforge.jtds.jdbc.Driver");
+        connection = getWorkConnection();
+        statement = connection.createStatement();
     }
     void execute(Query procedureQuery) throws SQLException {
-//        try {
-            executeQuery(procedureQuery);
-//        } catch (Exception e) {
-//            Log.e(e.getMessage(),e.fillInStackTrace());
-//        }
+        executeQuery(procedureQuery);
     }
     ResultSet get(Query procedureQuery, Entity entity) throws SQLException {
-//        try {
-            return executeQueryWithResultSet(procedureQuery, entity);
-//        } catch (Exception e) {
-//            Log.e(e.getMessage(),e.fillInStackTrace());
-//            return null;
-//        }
+        return executeQueryWithResultSet(procedureQuery, entity);
     }
     void close() throws SQLException {
-//        try {
-            closeConnectionManager();
-//        } catch (Exception e) {
-//            Log.e(e.getMessage(),e.getCause());
-//        }
+        closeConnectionManager();
     }
 
     private Connection getWorkConnection() throws SQLException {
