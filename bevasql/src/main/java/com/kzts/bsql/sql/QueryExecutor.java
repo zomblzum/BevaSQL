@@ -4,6 +4,7 @@ import com.kzts.bsql.builders.ProcedureBuilder;
 import com.kzts.bsql.parameters.ParameterFactory;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class QueryExecutor<V, E> {
@@ -22,7 +23,7 @@ public class QueryExecutor<V, E> {
         return this;
     }
 
-    public void execute() {
+    public void execute() throws SQLException {
         connect();
         connectionManager.execute(query);
         close();
@@ -40,10 +41,10 @@ public class QueryExecutor<V, E> {
         return data;
     }
 
-    private void connect() {
+    private void connect() throws SQLException {
         connectionManager.connect();
     }
-    private void close() {
+    private void close() throws SQLException {
         connectionManager.close();
     }
 }

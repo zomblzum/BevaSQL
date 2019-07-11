@@ -20,21 +20,21 @@ class ConnectionManager {
         return new ConnectionManager(connectionInfo);
     }
 
-    void connect() {
-        try {
+    void connect() throws SQLException {
+//        try {
             DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
             connection = getWorkConnection();
             statement = connection.createStatement();
-        } catch (Exception e) {
-            Log.e(e.getMessage(),e.getCause());
-        }
+//        } catch (Exception e) {
+//            Log.e(e.getMessage(),e.getCause());
+//        }
     }
-    void execute(Query procedureQuery) {
-        try {
+    void execute(Query procedureQuery) throws SQLException {
+//        try {
             executeQuery(procedureQuery);
-        } catch (Exception e) {
-            Log.e(e.getMessage(),e.fillInStackTrace());
-        }
+//        } catch (Exception e) {
+//            Log.e(e.getMessage(),e.fillInStackTrace());
+//        }
     }
     ResultSet get(Query procedureQuery, Entity entity) {
         try {
@@ -44,12 +44,12 @@ class ConnectionManager {
             return null;
         }
     }
-    void close() {
-        try {
+    void close() throws SQLException {
+//        try {
             closeConnectionManager();
-        } catch (Exception e) {
-            Log.e(e.getMessage(),e.getCause());
-        }
+//        } catch (Exception e) {
+//            Log.e(e.getMessage(),e.getCause());
+//        }
     }
 
     private Connection getWorkConnection() throws SQLException {

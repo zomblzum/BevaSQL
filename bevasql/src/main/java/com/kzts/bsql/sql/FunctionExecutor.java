@@ -4,6 +4,7 @@ import com.kzts.bsql.builders.FunctionBuilder;
 import com.kzts.bsql.parameters.ParameterFactory;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class FunctionExecutor<V, E> {
@@ -39,10 +40,10 @@ public class FunctionExecutor<V, E> {
         return data;
     }
 
-    private void connect() {
+    private void connect() throws SQLException {
         connectionManager.connect();
     }
-    private void close() {
+    private void close() throws SQLException {
         connectionManager.close();
     }
 }
