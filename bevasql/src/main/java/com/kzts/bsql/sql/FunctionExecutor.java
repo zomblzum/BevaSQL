@@ -1,6 +1,6 @@
 package com.kzts.bsql.sql;
 
-import com.kzts.bsql.builders.FunctionBuilder;
+import com.kzts.bsql.builders.FunctionBuilderSQL;
 import com.kzts.bsql.parameters.ParameterFactory;
 
 import java.sql.ResultSet;
@@ -14,7 +14,7 @@ public class FunctionExecutor<V, E> {
 
     FunctionExecutor(ConnectionManager connectionManager) {
         this.parameterFactory = new ParameterFactory<>();
-        this.query = new Query(new FunctionBuilder());
+        this.query = new Query(new FunctionBuilderSQL());
         this.connectionManager = connectionManager;
     }
 

@@ -8,6 +8,6 @@ import java.util.List;
 public interface Builder {
     String build(Query procedureQuery);
 
-    void setProcedureName(String procedure);
+    void setQuery(String procedure);
     void addParameters(List<Parameter> parameters);
 }

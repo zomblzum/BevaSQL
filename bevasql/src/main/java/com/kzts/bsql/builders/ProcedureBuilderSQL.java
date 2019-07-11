@@ -4,10 +4,10 @@ import com.kzts.bsql.parameters.Parameter;
 
 import java.util.List;
 
-public class ProcedureBuilder extends QueryBuilder {
+public class ProcedureBuilderSQL extends SQLQueryBuilder {
 
     @Override
-    public void setProcedureName(String procedure) {
+    public void setQuery(String procedure) {
         super.addValue("exec " + procedure + " ");
     }
 

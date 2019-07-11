@@ -4,10 +4,10 @@ import com.kzts.bsql.parameters.Parameter;
 
 import java.util.List;
 
-public class FunctionBuilder extends QueryBuilder {
+public class FunctionBuilderSQL extends SQLQueryBuilder {
 
     @Override
-    public void setProcedureName(String procedure) {
+    public void setQuery(String procedure) {
         super.addValue("select  * from " + procedure);
     }
 
