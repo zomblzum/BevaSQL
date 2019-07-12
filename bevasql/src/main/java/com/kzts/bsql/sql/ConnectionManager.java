@@ -1,9 +1,5 @@
 package com.kzts.bsql.sql;
 
-import android.os.StrictMode;
-
-import com.kzts.bsql.log.Log;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;

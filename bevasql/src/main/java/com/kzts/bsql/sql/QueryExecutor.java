@@ -2,6 +2,7 @@ package com.kzts.bsql.sql;
 
 import com.kzts.bsql.builders.ProcedureBuilderSQL;
 import com.kzts.bsql.parameters.ParameterFactory;
+import com.kzts.bsql.parameters.ParameterManager;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,10 +11,10 @@ import java.util.List;
 public class QueryExecutor<V, E> {
     private ConnectionManager connectionManager;
     private Query query;
-    private ParameterFactory<V> parameterFactory;
+    private ParameterFactory<V> parameterManager;
 
     QueryExecutor(ConnectionManager connectionManager) {
-        this.parameterFactory = new ParameterFactory<>();
+        this.parameterManager = new ParameterManager<>();
         this.query = new Query(new ProcedureBuilderSQL());
         this.connectionManager = connectionManager;
     }

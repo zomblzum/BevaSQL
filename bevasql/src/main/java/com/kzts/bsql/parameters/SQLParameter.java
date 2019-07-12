@@ -1,8 +1,13 @@
 package com.kzts.bsql.parameters;
 
-public abstract class SQLParameter implements Parameter {
-    protected String name;
-    protected String value;
+public class SQLParameter implements Parameter {
+    private String name;
+    private String value;
+
+    public SQLParameter(String name, String value) {
+        this.name = name;
+        this.value = value;
+    }
 
     @Override
     public String getName() {
