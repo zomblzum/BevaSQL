@@ -3,7 +3,7 @@ package com.kzts.bsql.sql;
 public class BevaSQL {
     private ConnectionManager connectionManager;
 
-    public BevaSQL fromValues(String server, String database, String user, String password) {
+    public static BevaSQL fromValues(String server, String database, String user, String password) {
         ConnectionToken token = new ConnectionToken(server, database, user, password);
         return new BevaSQL(token);
     }
