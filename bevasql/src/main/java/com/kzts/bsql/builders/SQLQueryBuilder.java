@@ -16,14 +16,10 @@ public abstract class SQLQueryBuilder implements Builder {
     }
 
     @Override
-    public void setQuery(String procedure) {
-
-    }
+    public abstract void setQuery(String procedure);
 
     @Override
-    public void addParameters(List<Parameter> parameters) {
-
-    }
+    public abstract void addParameters(List<Parameter> parameters);
 
     void addValue(String value) {
         queryText.append(value);

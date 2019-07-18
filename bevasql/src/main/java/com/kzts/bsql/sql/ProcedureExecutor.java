@@ -37,7 +37,7 @@ public class ProcedureExecutor<V, E> {
         connectionManager.execute(query);
         close();
     }
-    public List<E> get(Supplier<E> supplier) throws Exception {
+    public List<E> get(Supplier<E> supplier) throws SQLException, IllegalAccessException, ClassNotFoundException {
         connect();
 
         //ToDo вынести в разные методы

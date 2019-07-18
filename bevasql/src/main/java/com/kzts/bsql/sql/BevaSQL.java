@@ -1,5 +1,7 @@
 package com.kzts.bsql.sql;
 
+import java.sql.SQLException;
+
 public class BevaSQL {
     private ConnectionManager connectionManager;
 
@@ -34,5 +36,19 @@ public class BevaSQL {
      */
     public QueryExecutor query(String query) {
         return new QueryExecutor(connectionManager).set(query);
+    }
+
+    /**
+     * Проверка возможности присоединится к серверу
+     */
+    public boolean connectionAvailable() {
+        try {
+            connectionManager.connect();
+            connectionManager.close();
+            return true;
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

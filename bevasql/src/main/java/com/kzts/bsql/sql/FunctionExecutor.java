@@ -28,7 +28,7 @@ public class FunctionExecutor<V, E> {
         return this;
     }
 
-    public List<E> get(Supplier<E> supplier) throws Exception {
+    public List<E> get(Supplier<E> supplier) throws SQLException, ClassNotFoundException, IllegalAccessException {
         connect();
 
         //ToDo вынести в разные методы

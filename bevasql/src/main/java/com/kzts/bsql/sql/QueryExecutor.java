@@ -1,6 +1,6 @@
 package com.kzts.bsql.sql;
 
-import com.kzts.bsql.builders.ProcedureBuilderSQL;
+import com.kzts.bsql.builders.QueryBuilderSQL;
 import com.kzts.bsql.parameters.ParameterFactory;
 import com.kzts.bsql.parameters.ParameterManager;
 
@@ -15,7 +15,7 @@ public class QueryExecutor<V, E> {
 
     QueryExecutor(ConnectionManager connectionManager) {
         this.parameterManager = new ParameterManager<>();
-        this.query = new Query(new ProcedureBuilderSQL());
+        this.query = new Query(new QueryBuilderSQL());
         this.connectionManager = connectionManager;
     }
 
@@ -29,7 +29,7 @@ public class QueryExecutor<V, E> {
         connectionManager.execute(query);
         close();
     }
-    public List<E> get(Supplier<E> supplier) throws Exception {
+    public List<E> get(Supplier<E> supplier) throws SQLException, IllegalAccessException, ClassNotFoundException {
         connect();
 
         //ToDo вынести в разные методы

@@ -8,7 +8,7 @@ public class FunctionBuilderSQL extends SQLQueryBuilder {
 
     @Override
     public void setQuery(String procedure) {
-        super.addValue("select  * from " + procedure);
+        super.addValue("select * from " + procedure);
     }
 
     @Override
