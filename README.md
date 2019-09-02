@@ -59,8 +59,8 @@ Procedure with returning value
 ```java
 
 List<Person> result = bevaSQL.storedProcedure("get_all_persons")
-                     .addParameter("city","Moscow")
-                     .get(Person::new);
+			     .addParameter("city","Moscow")
+			     .get(Person::new);
         
 ```
 
@@ -69,8 +69,8 @@ Table valued function
 ```java
 
 List<Person> result = bevaSQL.tableFunction("get_all_persons")
-                     .addParameter("city","Moscow")
-                     .get(Person::new);
+			     .addParameter("city","Moscow")
+			     .get(Person::new);
         
 ```
 
@@ -100,6 +100,6 @@ allprojects {
 
 dependencies {
        implementation 'com.github.zomblzum:BevaSQL:0.3.7'
-       implementation 'net.sourceforge.jtds:jtds:1.3.1'
+       implementation 'net.sourceforge.jtds:jtds:1.3.0'
 }
 ```
