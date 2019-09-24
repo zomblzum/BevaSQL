@@ -6,16 +6,27 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-class ConnectionManager {
+class SqlBridge {
     private Connection connection;
     private Statement statement;
     private ConnectionToken connectionInfo;
 
-    private ConnectionManager(ConnectionToken connectionInfo) {
+    private SqlBridge(ConnectionToken connectionInfo) {
         this.connectionInfo = connectionInfo;
     }
-    static ConnectionManager getFromToken(ConnectionToken connectionInfo) {
-        return new ConnectionManager(connectionInfo);
+    static SqlBridge getFromToken(ConnectionToken connectionInfo) {
+        return new SqlBridge(connectionInfo);
+    }
+
+    boolean tryConnection() {
+        try {
+            connect();
+            close();
+            return true;
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     void connect() throws SQLException, ClassNotFoundException {
@@ -23,11 +34,11 @@ class ConnectionManager {
         connection = getWorkConnection();
         statement = connection.createStatement();
     }
-    void execute(Query procedureQuery) throws SQLException {
-        executeQuery(procedureQuery);
+    void execute(Query query) throws SQLException {
+        executeQuery(query);
     }
-    ResultSet get(Query procedureQuery, Entity entity) throws SQLException {
-        return executeQueryWithResultSet(procedureQuery, entity);
+    ResultSet get(Query query) throws SQLException {
+        return executeQueryWithResultSet(query);
     }
     void close() throws SQLException {
         closeConnectionManager();
@@ -36,11 +47,11 @@ class ConnectionManager {
     private Connection getWorkConnection() throws SQLException {
         return DriverManager.getConnection( connectionInfo.getMSSQLAddress());
     }
-    private ResultSet executeQueryWithResultSet(Query procedureQuery, Entity entity) throws SQLException {
-        return statement.executeQuery(procedureQuery.build());
+    private ResultSet executeQueryWithResultSet(Query query) throws SQLException {
+        return statement.executeQuery(query.getQueryText());
     }
-    private void executeQuery (Query procedureQuery) throws SQLException {
-        statement.execute(procedureQuery.build());
+    private void executeQuery (Query query) throws SQLException {
+        statement.execute(query.getQueryText());
     }
     private void closeConnectionManager() throws SQLException {
         connection.close();

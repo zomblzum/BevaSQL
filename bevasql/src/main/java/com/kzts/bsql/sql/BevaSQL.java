@@ -1,9 +1,7 @@
 package com.kzts.bsql.sql;
 
-import java.sql.SQLException;
-
 public class BevaSQL {
-    private ConnectionManager connectionManager;
+    private SqlBridge sqlBridge;
 
     public static BevaSQL fromValues(String server, String database, String user, String password) {
         ConnectionToken token = new ConnectionToken(server, database, user, password);
@@ -11,44 +9,37 @@ public class BevaSQL {
     }
 
     public BevaSQL(ConnectionToken token) {
-        this.connectionManager = ConnectionManager.getFromToken(token);
+        this.sqlBridge = SqlBridge.getFromToken(token);
     }
 
     /**
      * Хранимая процедура sql
      * @return Объект для заполнения и выполнения процедуры
      */
-    public ProcedureExecutor storedProcedure(String procedure) {
-        return new ProcedureExecutor(connectionManager).set(procedure);
+    public Query query(String queryText) {
+        return new Query(sqlBridge, queryText);
+    }
+
+    /**
+     * Хранимая процедура sql
+     * @return Объект для заполнения и выполнения процедуры
+     */
+    public StoredProcedure storedProcedure(String queryText) {
+        return new StoredProcedure(sqlBridge, queryText);
     }
 
     /**
      * Функция sql
      * @return Объект для управления функцией
      */
-    public FunctionExecutor tableFunction(String function) {
-        return new FunctionExecutor(connectionManager).set(function);
-    }
-
-    /**
-     * Обычный запрос
-     * @return Объект для управления функцией
-     */
-    public QueryExecutor query(String query) {
-        return new QueryExecutor(connectionManager).set(query);
+    public TableValuedFunction tableFunction(String queryText) {
+        return new TableValuedFunction(sqlBridge, queryText);
     }
 
     /**
      * Проверка возможности присоединится к серверу
      */
     public boolean connectionAvailable() {
-        try {
-            connectionManager.connect();
-            connectionManager.close();
-            return true;
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return false;
-        }
+        return sqlBridge.tryConnection();
     }
 }

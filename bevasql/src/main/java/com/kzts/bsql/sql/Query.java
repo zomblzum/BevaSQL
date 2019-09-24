@@ -1,35 +1,42 @@
 package com.kzts.bsql.sql;
 
-import com.kzts.bsql.builders.Builder;
-import com.kzts.bsql.parameters.Parameter;
-
-import java.util.ArrayList;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
-public class Query {
-    private String procedure;
-    private List<Parameter> parameters = new ArrayList<>();
-    private Builder builder;
+public class Query<E> {
+    private String queryText;
+    private SqlBridge sqlBridge;
 
-    Query(Builder builder) {
-        this.builder = builder;
-    }
-
-    String build() {
-        return builder.build(this);
+    Query(SqlBridge sqlBridge, String queryText) {
+        this.sqlBridge = sqlBridge;
+        this.queryText = queryText;
     }
 
-    public String getQuery() {
-        return procedure;
-    }
-    public List<Parameter> getParameters() {
-        return parameters;
+    String getQueryText() {
+        return queryText;
     }
 
-    void setProcedure(String procedure) {
-        this.procedure = procedure;
+    public void execute() throws SQLException, ClassNotFoundException {
+        connect();
+        sqlBridge.execute(this);
+        close();
     }
-    void addParameter(Parameter parameter) {
-        this.parameters.add(parameter);
+    public List<E> get(Supplier<E> supplier) throws SQLException, IllegalAccessException, ClassNotFoundException {
+        connect();
+
+        ResultSet resultSet = sqlBridge.get(this);
+        ResultSetReader<E> resultSetReader = new ResultSetReader<>(resultSet);
+        Entity<? extends E> entity = new Entity<>(supplier);
+        List<E> data = resultSetReader.toEntityList(entity);
+
+        close();
+        return data;
+    }
+    private void connect() throws SQLException, ClassNotFoundException {
+        sqlBridge.connect();
+    }
+    private void close() throws SQLException {
+        sqlBridge.close();
     }
 }
