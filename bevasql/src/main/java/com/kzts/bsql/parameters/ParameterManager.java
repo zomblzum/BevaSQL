@@ -6,8 +6,13 @@ public class ParameterManager<V> implements ParameterFactory<V> {
 
     @Override
     public Parameter getParameter(String name, V value) {
-        ParameterFactory<V> parameterFactory = getParameterFactory(value.getClass());
-        return parameterFactory.getParameter(name, value);
+        if(value != null) {
+            ParameterFactory<V> parameterFactory = getParameterFactory(value.getClass());
+            return parameterFactory.getParameter(name, value);
+        } else {
+            return new NullParameter(name);
+        }
+
     }
 
     private ParameterFactory<V> getParameterFactory(Class<?> parameterClass) {
