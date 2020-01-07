@@ -1,38 +1,45 @@
 package com.kzts.bsql.sql;
 
 public class BevaSQL {
-    private ConnectionManager connectionManager;
+    private SqlBridge sqlBridge;
 
-    public BevaSQL fromValues(String server, String database, String user, String password) {
+    public static BevaSQL fromValues(String server, String database, String user, String password) {
         ConnectionToken token = new ConnectionToken(server, database, user, password);
         return new BevaSQL(token);
     }
 
     public BevaSQL(ConnectionToken token) {
-        this.connectionManager = ConnectionManager.getFromToken(token);
+        this.sqlBridge = SqlBridge.getFromToken(token);
     }
 
     /**
      * Хранимая процедура sql
      * @return Объект для заполнения и выполнения процедуры
      */
-    public ProcedureExecutor storedProcedure(String procedure) {
-        return new ProcedureExecutor(connectionManager).set(procedure);
+    public Query query(String queryText) {
+        return new Query(sqlBridge, queryText);
+    }
+
+    /**
+     * Хранимая процедура sql
+     * @return Объект для заполнения и выполнения процедуры
+     */
+    public StoredProcedure storedProcedure(String queryText) {
+        return new StoredProcedure(sqlBridge, queryText);
     }
 
     /**
      * Функция sql
      * @return Объект для управления функцией
      */
-    public FunctionExecutor tableFunction(String function) {
-        return new FunctionExecutor(connectionManager).set(function);
+    public TableValuedFunction tableFunction(String queryText) {
+        return new TableValuedFunction(sqlBridge, queryText);
     }
 
     /**
-     * Обычный запрос
-     * @return Объект для управления функцией
+     * Проверка возможности присоединится к серверу
      */
-    public QueryExecutor query(String query) {
-        return new QueryExecutor(connectionManager).set(query);
+    public boolean connectionAvailable() {
+        return sqlBridge.tryConnection();
     }
 }
