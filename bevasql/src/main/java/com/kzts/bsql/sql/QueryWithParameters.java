@@ -1,20 +1,20 @@
 package com.kzts.bsql.sql;
 
 import com.kzts.bsql.parameters.Parameter;
+import com.kzts.bsql.parameters.ParameterBuilder;
 import com.kzts.bsql.parameters.ParameterFactory;
-import com.kzts.bsql.parameters.ParameterManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class QueryWithParameters<V,E> extends Query<E> {
     private List<Parameter> parameters;
-    private ParameterFactory<V> parameterFactory;
+    private ParameterBuilder<V> parameterBuilder;
 
     public QueryWithParameters(SqlBridge sqlBridge, String queryText) {
         super(sqlBridge, queryText);
         this.parameters = new ArrayList<>();
-        this.parameterFactory = new ParameterManager<>();
+        this.parameterBuilder = new ParameterFactory<>();
     }
 
     public QueryWithParameters addParameter(V value) {
@@ -22,7 +22,7 @@ public abstract class QueryWithParameters<V,E> extends Query<E> {
     }
 
     public QueryWithParameters addParameter(String name, V value) {
-        this.parameters.add(parameterFactory.getParameter(name, value));
+        this.parameters.add(parameterBuilder.getParameter(name, value));
         return this;
     }
 

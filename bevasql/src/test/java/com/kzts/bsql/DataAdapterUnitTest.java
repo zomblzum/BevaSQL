@@ -1,7 +1,7 @@
 package com.kzts.bsql;
 
 import com.kzts.bsql.parameters.Parameter;
-import com.kzts.bsql.parameters.ParameterManager;
+import com.kzts.bsql.parameters.ParameterFactory;
 
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DataAdapterUnitTest {
     private String n = "name";
-    private ParameterManager parameterMeneger = new ParameterManager();
+    private ParameterFactory parameterMeneger = new ParameterFactory();
 
     @Test
     void getString_isCorrect() {

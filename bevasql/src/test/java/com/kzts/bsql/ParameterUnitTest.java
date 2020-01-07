@@ -1,7 +1,7 @@
 package com.kzts.bsql;
 
 import com.kzts.bsql.parameters.Parameter;
-import com.kzts.bsql.parameters.ParameterManager;
+import com.kzts.bsql.parameters.ParameterFactory;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,11 +11,11 @@ class ParameterUnitTest {
     private String name = "parameter";
     private String stringValue = "value";
     private Parameter parameter;
-    private ParameterManager parameterManager = new ParameterManager();
+    private ParameterFactory parameterFactory = new ParameterFactory();
 
     @Test
     void parameterFromString_isCorrect() {
-        parameter = parameterManager.getParameter(name, stringValue);
+        parameter = parameterFactory.getParameter(name, stringValue);
         assertEquals(parameter.getName(), name);
         assertEquals(parameter.getValue(), "'" + stringValue + "'");
     }

@@ -1,6 +1,6 @@
 package com.kzts.bsql.parameters;
 
-public class VarcharParameterFactory<V> implements ParameterFactory<V> {
+public class VarcharParameterBuilder<V> implements ParameterBuilder<V> {
     @Override
     public Parameter getParameter(String name, V value) {
         return new SQLParameter(name, "'" + value + "'");
