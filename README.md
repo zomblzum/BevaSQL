@@ -99,7 +99,7 @@ allprojects {
 }
 
 dependencies {
-       implementation 'com.github.zomblzum:BevaSQL:0.3.7'
+       implementation 'com.github.zomblzum:BevaSQL:0.6.1'
        implementation 'net.sourceforge.jtds:jtds:1.3.0'
 }
 ```
